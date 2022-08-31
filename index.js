@@ -1,5 +1,4 @@
-// <<<<<<< Updated upstream
-// =======
+
 const moviesContainer = document.getElementById("moviesContainer");
 const myForm = document.getElementById('search-form');
 
@@ -12,6 +11,7 @@ function() {
     moviesContainer.innerHTML = renderMovies(movieData);
     // event listener code goes here
     });
+
 
     document.addEventListener('click', function(event) {
       // code for document click listener goes here
@@ -54,9 +54,21 @@ function renderMovies(movieArray) {
     <h5 class='card-title'>${currentMovie.Title}</h5>
     <p style="background-color:gray;">${currentMovie.Year}</p></div>
     <button class="btn btn-primary add-button" data-imdbid="${currentMovie.imdbID}">Add!</button>`
+
+  
+});
+
+function renderMovies(movieArray) {
+  let movieHtmlArray = movieArray.map((currentMovie) => {
+    return `<div>
+    <h2>${currentMovie.Title}</h2></div>`
+
   });
   
   return movieHtmlArray.join('')
   
+
 }
-// >>>>>>> Stashed changes
+
+
+
