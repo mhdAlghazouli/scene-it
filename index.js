@@ -10,7 +10,7 @@ function() {
     const searchString = document.getElementById("search-bar").value;  
     const urlEncodedSearchString = encodeURIComponent(searchString);
   
-    fetch("http://www.omdbapi.com/?apikey=59354c85&s=" + urlEncodedSearchString)
+    fetch("https://www.omdbapi.com/?apikey=59354c85&s=" + urlEncodedSearchString)
     .then(response => response.json())
     .then(data => {
       const movieHTML = renderMovies(data.Search);
