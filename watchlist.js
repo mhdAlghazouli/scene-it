@@ -1,13 +1,23 @@
 
 document.addEventListener('DOMContentLoaded', (e) => {
-  e.preventDefault();
-  
+  e.preventDefault();  
   const moviesContainer = document.getElementById("moviesContainer");
+  let watchlist =JSON.parse(localStorage.getItem('watchlist'));
+  moviesContainer.innerHTML = renderMovies(watchlist);
   
-  const watchlist =JSON.parse(localStorage.getItem('watchlist'));
-  console.log(watchlist)
-    moviesContainer.innerHTML = renderMovies(watchlist);
-
+  const db = document.querySelectorAll('.delete-btn');
+  
+  db.forEach(el => {
+    document.addEventListener('click', event => {
+      
+      watchlist = watchlist.filter(item => event.target.id !== item.imdbID)
+      localStorage.setItem(`watchlist`,JSON.stringify(watchlist));
+      moviesContainer.innerHTML = renderMovies(watchlist);
+    });
+  });
+  
+  
+  
 });
 
 function renderMovies(movieArray) {
@@ -20,11 +30,11 @@ function renderMovies(movieArray) {
     <span style="font-size:15px" class="card-text text-light bg-dark">${currentMovie.Year}</span>
     </h5>
     </div>
-    <button class="btn btn-primary btn-lg add-button  ml-3 mb-3" data-imdbid="${currentMovie.imdbID}"  style="width:90px;">Add!</button>
+    <button class="btn btn-primary delete-btn btn-lg ml-3 mb-3" data-imdbid="${currentMovie.imdbID}"  style="width:90px;" id="${currentMovie.imdbID}">Delete!</button>
     </div>
     `
   });
   
   return movieHtmlArray.join('')
   
-}
+};
