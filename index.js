@@ -24,7 +24,10 @@ function() {
       // code for document click listener goes here
       if(event.target.classList.contains('add-button')){
         const movieID = event.target.dataset.imdbid;
+        
         saveToWatchlist(movieID);
+        console.log(movieData)
+        
       };
 
     });
@@ -34,15 +37,14 @@ function() {
     const movie = movieData.find(function(currentMovie) {
       return currentMovie.imdbID == movieID;
     });
-
     let watchlistJSON = localStorage.getItem('watchlist');
     let watchlist = JSON.parse(watchlistJSON);
     
     if(watchlist === null) {
       watchlist = [];
-    };
-      
-      watchlist.push(movie);
+    }
+    
+    watchlist.push(movie);
       watchlistJSON = JSON.stringify(watchlist);
       localStorage.setItem('watchlist', watchlistJSON);    
 };
